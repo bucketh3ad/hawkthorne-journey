@@ -5,6 +5,7 @@ local fonts = require 'fonts'
 local sound = require 'vendor/TEsound'
 local Cauldron = {}
 Cauldron.__index = Cauldron
+Cauldron.isInteractive = true
 
 
 function Cauldron.new(node, collider)
@@ -32,7 +33,7 @@ function Cauldron:draw()
     love.graphics.draw(self.image, self.x, self.y, 0, 1)
 end
 
-function Cauldron:keypressed( button, player )
+function Cauldron:keypressed( button, player, level )
     if button == 'INTERACT' then
         -- Checks if the player has items to brew with
         local playerMaterials = player.inventory.pages.materials
@@ -61,6 +62,7 @@ function Cauldron:keypressed( button, player )
             player.freeze = false
             if result == 'Yes' then
                 local screenshot = love.graphics.newImage(love.graphics.newScreenshot())
+                level.paused = true
                 Gamestate.switch('brewing', player, screenshot)
             end
         end

@@ -89,12 +89,12 @@ function Activenpc:draw()
     end
 end
 
-function Activenpc:keypressed( button, player )
+function Activenpc:keypressed( button, player, level )
     if self.prompt then
         return self.prompt:keypressed( button )
     end
     if button == 'INTERACT' then
-        self.props.onInteract(self, player)
+        self.props.onInteract(self, player, level)
         -- Key has been handled, halt further processing
         return true
     end

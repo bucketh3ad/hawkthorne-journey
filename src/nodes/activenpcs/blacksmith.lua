@@ -36,13 +36,14 @@ return {
             end)
         end)
     end,
-    onInteract = function(activenpc, player)
+    onInteract = function(activenpc, player, level)
         local options = {"Yes","No"}
         local callback = function(result)
             activenpc.prompt = nil
             player.freeze = false
             local screenshot = love.graphics.newImage( love.graphics.newScreenshot() )
             if result == "Yes" then
+                level.paused = true
                 Gamestate.switch("shopping", player, screenshot, activenpc.name)
             end
         end

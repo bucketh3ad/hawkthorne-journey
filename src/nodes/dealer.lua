@@ -29,7 +29,7 @@ end
 function Dealer:draw()
 end
 
-function Dealer:keypressed( button, player )
+function Dealer:keypressed( button, player, level )
 
     if button == 'INTERACT' then
         player.freeze = true
@@ -47,6 +47,7 @@ function Dealer:keypressed( button, player )
             player.freeze = false
             if result == 'Poker' or result == 'Blackjack' then
               local screenshot = love.graphics.newImage( love.graphics.newScreenshot() )
+              level.paused = true
               Gamestate.switch(result:lower() .. 'game', player, screenshot)
             end
         end

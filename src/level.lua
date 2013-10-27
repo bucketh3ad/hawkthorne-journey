@@ -597,7 +597,7 @@ function Level:keypressed( button )
     -- Then look for any interactive nodes that may be at the same location
     for i,node in pairs(tmpNodes) do
         if node.isInteractive and node.player_touched and node.keypressed then
-            if node:keypressed( button, self.player) then
+            if node:keypressed( button, self.player, self) then
               return true
             end
         end
