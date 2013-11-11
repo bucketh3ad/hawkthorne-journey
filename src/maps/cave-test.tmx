@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="30" height="15" tilewidth="24" tileheight="24">
+ <tileset firstgid="1" name="forest" tilewidth="24" tileheight="24">
+  <image source="../images/tilesets/forest.png" width="216" height="504"/>
+ </tileset>
+ <layer name="background" width="30" height="15">
+  <data encoding="base64" compression="zlib">
+   eJxzZ2BgcB/Fo3gUj+JRPIpHKAYA3pV8zw==
+  </data>
+ </layer>
+ <layer name="foreground" width="30" height="15">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2D4ARkglqUjhgFVIFajI0a21wOII+mEke0NxBoDtAUDZW8EEEcNgL30BvTMO8iYnnkHGQMABWEaQg==
+  </data>
+ </layer>
+ <objectgroup name="block" width="30" height="15">
+  <object x="48" y="144" width="672" height="72"/>
+  <object x="48" y="144" width="48" height="144"/>
+  <object x="0" y="312" width="720" height="48"/>
+ </objectgroup>
+ <objectgroup name="nodes" width="30" height="15">
+  <object type="enemy" x="132" y="218" width="24" height="24">
+   <properties>
+    <property name="enemytype" value="bat"/>
+   </properties>
+  </object>
+  <object type="enemy" x="179" y="234" width="24" height="24">
+   <properties>
+    <property name="enemytype" value="bat"/>
+   </properties>
+  </object>
+  <object type="enemy" x="230" y="234" width="24" height="24">
+   <properties>
+    <property name="enemytype" value="bat"/>
+   </properties>
+  </object>
+  <object type="enemy" x="311" y="228" width="24" height="24">
+   <properties>
+    <property name="enemytype" value="bat"/>
+   </properties>
+  </object>
+  <object type="enemy" x="405" y="218" width="24" height="24">
+   <properties>
+    <property name="enemytype" value="bat"/>
+   </properties>
+  </object>
+  <object type="enemy" x="498" y="221" width="24" height="24">
+   <properties>
+    <property name="enemytype" value="bat"/>
+   </properties>
+  </object>
+  <object type="enemy" x="619" y="218" width="24" height="24">
+   <properties>
+    <property name="enemytype" value="bat"/>
+   </properties>
+  </object>
+  <object type="enemy" x="672" y="219" width="24" height="24">
+   <properties>
+    <property name="enemytype" value="bat"/>
+   </properties>
+  </object>
+  <object name="main" type="door" x="24" y="264" width="24" height="48"/>
+  <object type="enemy" x="253" y="249" width="24" height="24">
+   <properties>
+    <property name="enemytype" value="bat"/>
+   </properties>
+  </object>
+  <object type="enemy" x="283" y="225" width="24" height="24">
+   <properties>
+    <property name="enemytype" value="bat"/>
+   </properties>
+  </object>
+  <object type="enemy" x="357" y="220" width="24" height="24">
+   <properties>
+    <property name="enemytype" value="bat"/>
+   </properties>
+  </object>
+  <object type="enemy" x="372" y="223" width="24" height="24">
+   <properties>
+    <property name="enemytype" value="bat"/>
+   </properties>
+  </object>
+  <object type="enemy" x="426" y="218" width="24" height="24">
+   <properties>
+    <property name="enemytype" value="bat"/>
+   </properties>
+  </object>
+  <object type="enemy" x="449" y="217" width="24" height="24">
+   <properties>
+    <property name="enemytype" value="bat"/>
+   </properties>
+  </object>
+  <object type="enemy" x="475" y="220" width="24" height="24">
+   <properties>
+    <property name="enemytype" value="bat"/>
+   </properties>
+  </object>
+  <object type="enemy" x="517" y="218" width="24" height="24">
+   <properties>
+    <property name="enemytype" value="bat"/>
+   </properties>
+  </object>
+  <object type="enemy" x="549" y="219" width="24" height="24">
+   <properties>
+    <property name="enemytype" value="bat"/>
+   </properties>
+  </object>
+  <object type="enemy" x="581" y="219" width="24" height="24">
+   <properties>
+    <property name="enemytype" value="bat"/>
+   </properties>
+  </object>
+  <object type="enemy" x="581" y="219" width="24" height="24">
+   <properties>
+    <property name="enemytype" value="bat"/>
+   </properties>
+  </object>
+  <object type="enemy" x="603" y="219" width="24" height="24">
+   <properties>
+    <property name="enemytype" value="bat"/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>
