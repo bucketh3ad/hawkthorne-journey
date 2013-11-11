@@ -46,6 +46,8 @@ function Projectile.new(node, collider)
   proj.bb.node = proj
   proj.stayOnScreen = proj.props.stayOnScreen
   proj.start_x = node.x
+  proj.start_y = node.y
+
   proj.explosive = false or proj.props.explosive
   proj.explodeTime = proj.props.explodeTime or 0 
 
@@ -98,6 +100,7 @@ function Projectile.new(node, collider)
   proj.angle = 0
   proj.complete = false --updated by finish()
   proj.damage = proj.props.damage or 0
+  proj.knockback = proj.props.knockback or 250
   -- Damage that does not affect all enemies ie. stab, fire
   -- Don't forget to pass this into hurt functions in the props file
   proj.special_damage = proj.props.special_damage or {}
@@ -273,6 +276,7 @@ function Projectile:collide(node, dt, mtv_x, mtv_y)
      (node.isEnemy and self.enemyCanPickUp and not self.holder) then
     node:registerHoldable(self)
   end
+
   if self.props.collide then
     self.props.collide(node, dt, mtv_x, mtv_y,self)
   end
