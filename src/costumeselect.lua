@@ -4,9 +4,6 @@ local character = require 'character'
 local controls = require('inputcontroller').get()
 local fonts = require 'fonts'
 local Gamestate = require 'vendor/gamestate'
-local level = require 'level'
--- see if I need this one
-local Player = require 'player'
 local sound = require 'vendor/TEsound'
 -- use vertical particles instead of background & character strips
 -- will have to do more coding later to get background to match
@@ -31,12 +28,6 @@ local function __NULL__() end
 
 function state:init()
 
--- commenting out the original code for easy reference
-
---  self.side = 0 -- 0 for left, 1 for right
---  self.level = 0 -- 0 through 3 for characters
---  self.current_page = 1
-
   self.select = 'characterPick'
   self.characterLevel = 1
   self.column = 1
@@ -45,11 +36,6 @@ function state:init()
  
 -- change this later to display more costumes on a line 
   self.rowLength = 6
-
-
---  self.chartext = ""
---  self.costtext = ""
---  self.randomtext = ""
 
   self.characterText = ""
   self.costumeText = ""
@@ -61,7 +47,6 @@ function state:enter(previous)
   VerticalParticles.init()
 
   self.select = 'characterPick'
---  self.current_page = 1
 
   self.selectionBox = love.graphics.newImage('images/menu/selection.png')
 
@@ -79,20 +64,15 @@ function state:enter(previous)
   self.selections[8] = 'dean'
   self.selections[9] = 'chang'
 
-  -- gives table of characters on current page
-  --self.selections = self.selections[self.current_page]
-
   fonts.set('big')
   self.previous = previous
   
   -- possibly include option of randomly chosing costume?
   -- that would involve more coding too
+  -- I don't actually print these at the moment
   self.characterText = "PRESS " .. controls:getKey('JUMP') .. " TO CHOOSE CHARACTER"
   self.costumeText = "PRESS " .. controls:getKey('JUMP') .. " TO CHOOSE COSTUME" 
 
---  self.chartext = "PRESS " .. controls:getKey('JUMP') .. " TO CHOOSE CHARACTER" 
---  self.costtext = "PRESS " .. controls:getKey('ATTACK') .. " or " ..controls:getKey('INTERACT') .. " TO CHANGE COSTUME"
---  self.randomtext = "PRESS " .. controls:getKey('SELECT') .. " TO GET A RANDOM COSTUME"
 end
 
 function state:character()
@@ -106,17 +86,9 @@ function state:character()
 end
 
 function state:loadCharacter(name)
-
--- this is the thing that switches costume somehow
--- count?
--- I think currently it'll stick to the base sprtie which is not what we want
--- look at how count changes in the other one
--- here count = (row-1)*rowLength + column
-
+-- could use this to save info about characters row/column # possibly
   if not self.characters[name] then
     self.characters[name] = character.load(name)
-    self.characters[name].count = 1
-    self.characters[name].costume = 'base'
   end
 
   return self.characters[name]
@@ -124,9 +96,7 @@ end
 
 function state:keypressed( button )
 
--- will probably want to switch this out for different Gamestate
--- definitely get rid of the quit option
--- only in there for easy exiting the game
+  -- switch to previous gamestate
   if button == "START" then
    love.event.push("quit")
     --Gamestate.switch(self.previous)
@@ -142,9 +112,6 @@ function state:keypressed( button )
 end
 
 function state:characterKeypressed(button)
-
-  --local level = self.level
-  --local options = 4
 
   local level = self.characterLevel
   local options = #self.selections
@@ -169,8 +136,7 @@ function state:characterKeypressed(button)
       
       self.columnLength = math.ceil(self.costumeNumber/self.rowLength)
       self.lastRowLength = nonzeroMod(self.costumeNumber, self.rowLength)    
-
-    -- gets costume information    
+   
       self.costumeName = {}
       self.costumeSheet = {}
       self.costumeOw = {}
@@ -225,15 +191,13 @@ function state:costumeKeypressed(button)
     if self:character() then
     local name = self.selections[self.characterLevel]
     local sheet = self.costumeSheet[self.costumeCount]
-    --local currentPick = self:character()
     character.pick(name, sheet)
-  --character.pick(currentPick.name, currentPick.costume)
+  -- do I need the two lines below?
   --local current = character.current()
   --current.changed = true
   
+  -- change to previous gamestate
     Gamestate.switch('studyroom','main')
-
- -- love.event.push("quit")
     end
 	
   elseif button == "ATTACK" then
@@ -331,6 +295,7 @@ function state:update(dt)
   VerticalParticles.update(dt)
 end
 
+-- not sure I want this one
 Gamestate.home = state
 
 return state
