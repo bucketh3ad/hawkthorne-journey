@@ -16,7 +16,8 @@ function state:init()
     if option == 'exit' then
       love.event.push("quit")
     elseif option == 'controls' then
-      Gamestate.switch('instructions')
+    -- change back to 'instructions'
+      Gamestate.switch('costumeselect')
     else
       Gamestate.switch(option)
     end
