@@ -181,8 +181,9 @@ function Enemy:hurt( damage, special_damage, knockback )
                             function() self.knockbackActive = false end)
         end
         if not self.flashing then
+            self.flashing = true
             self.flash = true
-            self.flashing = Timer.addPeriodic(.12, function() self.flash = not self.flash end)
+            self.flashingTimer = Timer.addPeriodic(.12, function() self.flash = not self.flash end)
         end
         self.reviveTimer = Timer.add( self.revivedelay, function()
                                       self.state = 'default'
@@ -208,8 +209,9 @@ end
 
 function Enemy:cancel_flash()
     if self.flashing then
-        Timer.cancel(self.flashing)
-        self.flashing = nil
+        self.flashing = false
+        Timer.cancel(self.flashingTimer)
+        self.flashingTimer = nil
         self.flash = false
     end
 end
