@@ -5,6 +5,7 @@ local controls = require('inputcontroller').get()
 local fonts = require 'fonts'
 local Gamestate = require 'vendor/gamestate'
 local sound = require 'vendor/TEsound'
+local Player = require 'player'
 -- use vertical particles instead of background & character strips
 -- will have to do more coding later to get background to match
 -- need to add in all occurances of VerticleParticles in this code
@@ -189,15 +190,14 @@ function state:costumeKeypressed(button)
   elseif button == "JUMP" then
     sound.playSfx('confirm')
     if self:character() then
+    local player = Player.factory() -- expects existing player object
     local name = self.selections[self.characterLevel]
     local sheet = self.costumeSheet[self.costumeCount]
     character.pick(name, sheet)
-  -- do I need the two lines below?
-  --local current = character.current()
-  --current.changed = true
+    player.character = character.current()
   
   -- change to previous gamestate
-    Gamestate.switch('studyroom','main')
+    Gamestate.switch('studyroom', 'main')
     end
 	
   elseif button == "ATTACK" then

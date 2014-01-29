@@ -25,6 +25,7 @@ function state:onSelectCallback()
       ['MUSIC VOLUME'] = true,
     }
     local menus = {
+      ['COSTUME'] = 'change_costume',
       ['GAME'] = 'game_menu',
       ['RESET SETTINGS & EXIT'] = 'reset_settings',
       ['RESET SETTINGS/SAVES'] = 'reset_menu',
@@ -61,6 +62,7 @@ local OPTIONS = {
 }
 
 local MENU = {
+  {name = 'COSTUME'},
   {name = 'GAME', page = {
     {name = 'HARDCORE MODE'},
     {name = 'SEND PLAY DATA'},
@@ -167,7 +169,11 @@ end
 
 function state:main_menu()
   self:options_menu()
-  Gamestate.switch(self.previous)
+  Gamestate.switch('pause')
+end
+
+function state:change_costume()
+  Gamestate.switch('costumeselect')
 end
 
 function state:updateHardcore()
