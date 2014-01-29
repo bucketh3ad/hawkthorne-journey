@@ -260,7 +260,7 @@ function Level:loadNode(path)
   return true, class
 end
 
-function Level:restartLevel()
+function Level:restartLevel(keepPosition)
     assert(self.name ~= "overworld","level's name cannot be overworld")
     assert(Gamestate.currentState() ~= Gamestate.get("overworld"),"level cannot be overworld")
     self.over = false
@@ -271,9 +271,10 @@ function Level:restartLevel()
         width = self.map.width * self.map.tilewidth,
         height = self.map.height * self.map.tileheight
     }
-    
-    self.player.position = {x = self.default_position.x,
+    if not keepPosition then
+      self.player.position = {x = self.default_position.x,
                             y = self.default_position.y}
+    end
     Floorspaces:init()
 end
 
@@ -303,6 +304,9 @@ function Level:enter(previous, door, position)
     end
     if not self.player then
         self:restartLevel()
+    end
+    if previous==Gamestate.get('costumeselect') then
+        self:restartLevel(true)
     end
 
     camera.max.x = self.map.width * self.map.tilewidth - window.width

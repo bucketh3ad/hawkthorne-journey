@@ -43,7 +43,7 @@ function state:init()
 
 end
 
-function state:enter(previous)
+function state:enter(previous, target)
 
   VerticalParticles.init()
 
@@ -67,6 +67,7 @@ function state:enter(previous)
 
   fonts.set('big')
   self.previous = previous
+  self.target = target
   
   -- possibly include option of randomly chosing costume?
   -- that would involve more coding too
@@ -99,8 +100,8 @@ function state:keypressed( button )
 
   -- switch to previous gamestate
   if button == "START" then
-   love.event.push("quit")
-    --Gamestate.switch(self.previous)
+    --love.event.push("quit")
+    Gamestate.switch(self.previous)
     return
   end
   
@@ -195,9 +196,10 @@ function state:costumeKeypressed(button)
     local sheet = self.costumeSheet[self.costumeCount]
     character.pick(name, sheet)
     player.character = character.current()
+    player.character.changed = true
   
   -- change to previous gamestate
-    Gamestate.switch('studyroom', 'main')
+    Gamestate.switch(self.target)
     end
 	
   elseif button == "ATTACK" then

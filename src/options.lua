@@ -173,7 +173,7 @@ function state:main_menu()
 end
 
 function state:change_costume()
-  Gamestate.switch('costumeselect')
+  Gamestate.switch('costumeselect', self.target)
 end
 
 function state:updateHardcore()
@@ -184,12 +184,13 @@ function state:update(dt)
     VerticalParticles.update(dt)
 end
 
-function state:enter(previous)
+function state:enter(previous, target)
     fonts.set( 'big' )
     sound.playMusic( "daybreak" )
 
     camera:setPosition(0, 0)
     self.previous = previous
+    self.target = target
 end
 
 function state:leave()
